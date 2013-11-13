@@ -25,11 +25,11 @@ namespace ControlePessoalBE.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<CPContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new CPContext())
                     {
                         if (!context.Database.Exists())
                         {
