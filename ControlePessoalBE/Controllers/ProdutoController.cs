@@ -82,6 +82,27 @@ namespace ControlePessoalBE.Controllers
             return Json(db.Produtos.ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult FindCodigo(string codigo)
+        {
+            return Json(db.Produtos.Where(p => p.ProdutoId == db.Codigos.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault().ProdutoID).First(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CreateProd(string descricao, double quantidade, double quantidadeaviso, string codigo)
+        {
+            ProdutoModel produto = new ProdutoModel();
+            produto.Descricao = descricao;
+            produto.Quantidade = quantidade;
+            produto.QuantidadeAviso = quantidadeaviso;
+            CodigoModel codigoM = new CodigoModel();
+            codigoM.Cadastro = DateTime.Now;
+            codigoM.Codigo = codigo;
+            produto.Codigos.Add(codigoM);
+            produto = db.Produtos.Add(produto);
+            db.SaveChanges();
+            return Json(produto, JsonRequestBehavior.AllowGet); 
+        }
+
         //
         // GET: /Produto/Edit/5
 
