@@ -4,5 +4,15 @@
     <string name="app_name">ControlePessoal</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_produtos">ProdutosAct</string>
+    <string name="title_section1">Lista</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="opcoes">Opções</string>
+    <string name="add_codigo">Adicionar Código</string>
+    <string name="codigo">Código</string><string name="confirmar">Confirmar</string><string name="scan_bc">Leitor de código de barras</string>
 
 </resources>

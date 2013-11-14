@@ -11,6 +11,7 @@ namespace ControlePessoalBE.Models
         public CPContext()
             : base("DefaultConnection")
         {
+            Database.SetInitializer<CPContext>(new DropCreateDatabaseIfModelChanges<CPContext>());
         }
 
         public DbSet<ProdutoModel> Produtos { get; set; }
