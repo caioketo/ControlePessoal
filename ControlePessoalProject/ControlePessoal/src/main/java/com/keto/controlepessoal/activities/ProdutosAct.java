@@ -105,6 +105,10 @@ public class ProdutosAct extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_add_prod) {
+            //
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

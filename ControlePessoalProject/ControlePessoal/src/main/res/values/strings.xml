@@ -14,5 +14,6 @@
     <string name="opcoes">Opções</string>
     <string name="add_codigo">Adicionar Código</string>
     <string name="codigo">Código</string><string name="confirmar">Confirmar</string><string name="scan_bc">Leitor de código de barras</string>
+    <string name="add_prod">Adicionar Produto</string>
 
 </resources>
