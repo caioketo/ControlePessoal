@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.keto.controlepessoal.activities.ProdutosAct;
+import com.keto.controlepessoal.activities.MercadoAct;
 import com.keto.controlepessoal.service.OnAlarmReciever;
 import com.keto.controlepessoal.util.IntentIntegrator;
 import com.keto.controlepessoal.util.IntentResult;
@@ -112,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
             btnProd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(ctx, ProdutosAct.class));
+                    startActivity(new Intent(ctx, MercadoAct.class));
                 }
             });
             ((Button)rootView.findViewById(R.id.btnScan)).setOnClickListener(new View.OnClickListener() {

@@ -88,16 +88,12 @@ namespace ControlePessoalBE.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateProd(string descricao, double quantidade, double quantidadeaviso, string codigo)
+        public JsonResult CreateProd(string descricao, double quantidade, double quantidadeaviso)
         {
             ProdutoModel produto = new ProdutoModel();
             produto.Descricao = descricao;
             produto.Quantidade = quantidade;
             produto.QuantidadeAviso = quantidadeaviso;
-            CodigoModel codigoM = new CodigoModel();
-            codigoM.Cadastro = DateTime.Now;
-            codigoM.Codigo = codigo;
-            produto.Codigos.Add(codigoM);
             produto = db.Produtos.Add(produto);
             db.SaveChanges();
             return Json(produto, JsonRequestBehavior.AllowGet); 

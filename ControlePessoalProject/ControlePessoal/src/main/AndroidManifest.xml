@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -38,11 +38,16 @@
         <service android:name="com.keto.controlepessoal.service.AppService" />
 
         <activity
-            android:name="com.keto.controlepessoal.activities.ProdutosAct"
+            android:name=".activities.MercadoAct"
             android:label="@string/title_activity_produtos" >
         </activity>
-        <activity android:name="com.google.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.keto.controlepessoal.AddProduto"
+            android:label="@string/title_activity_add_produto" >
+        </activity>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.keto.controlepessoal.R;
-import com.keto.controlepessoal.activities.ProdutosAct;
+import com.keto.controlepessoal.activities.MercadoAct;
 import com.keto.controlepessoal.classes.Produto;
-import com.keto.controlepessoal.classes.adapters.ProdutoAdapter;
+import com.keto.controlepessoal.classes.adapters.GenericAdapter;
 import com.keto.controlepessoal.util.Communicator;
 import com.keto.controlepessoal.util.IntentIntegrator;
 import com.keto.controlepessoal.util.IntentResult;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 public class ProdutoListFragment extends Fragment {
     static final int ADD_CODIGO = 0;
     ListView lstProdutos;
-    ProdutoAdapter adapter;
+    GenericAdapter adapter;
     ArrayList<Produto> Produtos;
     private static final String ARG_SECTION_NUMBER = "section_number";
     int SelProdId;
@@ -68,7 +69,8 @@ public class ProdutoListFragment extends Fragment {
             }
         }
         catch (Exception ex) { }
-        adapter = new ProdutoAdapter(Produtos);
+        adapter = new GenericAdapter(Produtos, new int[] { R.id.tvwDescricao, R.id.tvwQuantidade },
+                new String[] { "Descricao", "Quantidade" }, R.layout.produto_item);
         lstProdutos.setAdapter(adapter);
         registerForContextMenu(lstProdutos);
         return rootView;
@@ -78,7 +80,6 @@ public class ProdutoListFragment extends Fragment {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(getString(R.string.opcoes));
         menu.add(Menu.NONE, ADD_CODIGO, ADD_CODIGO, getString(R.string.add_codigo));
     }
@@ -99,8 +100,6 @@ public class ProdutoListFragment extends Fragment {
             catch (Exception ex) {
 
             }
-            //edtCodigo.setText(scan.getContents());
-            //dialog.show();
         }
     }
 
@@ -157,7 +156,21 @@ public class ProdutoListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((ProdutosAct) activity).onSectionAttached(
+        ((MercadoAct) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_add) {
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.compras, menu);
     }
 }

@@ -8,21 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.keto.controlepessoal.MainActivity;
-import com.keto.controlepessoal.R;
-import com.keto.controlepessoal.classes.Produto;
+import com.keto.controlepessoal.classes.ClasseBase;
 
 import java.util.ArrayList;
 
 /**
- * Created by developer on 14/11/13.
+ * Created by developer on 19/11/13.
  */
-public class ProdutoAdapter extends BaseAdapter {
-    private ArrayList<Produto> Lista;
+public class GenericAdapter extends BaseAdapter {
+    private ArrayList<? extends ClasseBase> Lista;
     private static LayoutInflater inflater=null;
+    private int[] Ids;
+    private String[] Props;
+    private int LayoutId;
 
-    public ProdutoAdapter(ArrayList<Produto> data) {
+    public GenericAdapter(ArrayList<? extends ClasseBase> data, int[] ids, String[] props, int layout) {
         Lista = data;
         inflater = (LayoutInflater) MainActivity.ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        Ids = ids;
+        Props = props;
+        LayoutId = layout;
     }
 
     @Override
@@ -37,19 +42,20 @@ public class ProdutoAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return Lista.get(position).ProdutoId;
+        return (Long)Lista.get(position).get("ID");
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.produto_item, null);
+            vi = inflater.inflate(LayoutId, null);
 
         assert vi != null;
 
-        ((TextView)vi.findViewById(R.id.tvwDescricao)).setText(Lista.get(position).Descricao);
-        ((TextView)vi.findViewById(R.id.tvwQuantidade)).setText(((Double)Lista.get(position).Quantidade).toString());
+        for (int i = 0; i < Ids.length; i++) {
+            ((TextView)vi.findViewById(Ids[i])).setText((String)Lista.get(position).get(Props[i]));
+        }
 
         return vi;
     }

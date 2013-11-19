@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by developer on 13/11/13.
  */
-public class Produto {
+public class Produto extends ClasseBase {
     public int ProdutoId;
     public String Descricao;
     public double Quantidade;
@@ -38,5 +38,28 @@ public class Produto {
         catch (Exception ex) {
             Log.e("JsonError", ex.getMessage());
         }
+    }
+
+    @Override
+    public Object get(String prop) {
+        if (prop.equals("ID") || prop.equals("ProdutoId")) {
+            return ProdutoId;
+        }
+        else if (prop.equals("Descricao")) {
+            return Descricao;
+        }
+        else if (prop.equals("Quantidade")) {
+            return Quantidade;
+        }
+        else if (prop.equals("QuantidadeAviso")) {
+            return QuantidadeAviso;
+        }
+        else if (prop.equals("Codigos")) {
+            return Codigos;
+        }
+        else if (prop.equals("Precos")) {
+            return Precos;
+        }
+        return null;
     }
 }

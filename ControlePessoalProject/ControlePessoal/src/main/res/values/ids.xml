@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><item name="lstLista" type="id"/><item name="btnProdutos" type="id"/><item name="tvwDescricao" type="id"/><item name="tvwQuantidade" type="id"/><item name="edt_codigo" type="id"/><item name="btnConfirmar" type="id"/><item name="btnScan" type="id"/></resources>
+<resources><item name="lstLista" type="id"/><item name="btnProdutos" type="id"/><item name="tvwDescricao" type="id"/><item name="tvwQuantidade" type="id"/><item name="edt_codigo" type="id"/><item name="btnConfirmar" type="id"/><item name="btnScan" type="id"/><item name="edtDescricao" type="id"/><item name="edtQuantidade" type="id"/><item name="edtQtdeMin" type="id"/><item name="tvwCompraId" type="id"/><item name="tvwLocal" type="id"/></resources>
