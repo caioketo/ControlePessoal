@@ -8,6 +8,7 @@
     <string name="title_produtos">Produtos</string>
     <string name="title_compras">Compras</string>
     <string name="title_locais">Locais</string>
+    <string name="title_add_produto">Adicionar Produto</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

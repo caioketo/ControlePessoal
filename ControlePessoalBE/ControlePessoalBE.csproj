@@ -161,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -168,9 +169,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CodigoModel.cs" />
+    <Compile Include="Models\CompraModel.cs" />
     <Compile Include="Models\CPContext.cs" />
+    <Compile Include="Models\ItemDeCompraModel.cs" />
+    <Compile Include="Models\Json\CodigoJson.cs" />
+    <Compile Include="Models\Json\CompraJson.cs" />
+    <Compile Include="Models\Json\ItemDeCompraJson.cs" />
+    <Compile Include="Models\Json\LocalJson.cs" />
+    <Compile Include="Models\Json\PrecoJson.cs" />
+    <Compile Include="Models\LocalModel.cs" />
     <Compile Include="Models\PrecoModel.cs" />
-    <Compile Include="Models\ProdutoJson.cs" />
+    <Compile Include="Models\Json\ProdutoJson.cs" />
     <Compile Include="Models\ProdutoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

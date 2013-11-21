@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by developer on 13/11/13.
  */
-public class Preco {
+public class Preco extends ClasseBase {
     public int PrecoId;
     public Date Cadastro;
     public double Preco;
@@ -23,5 +23,19 @@ public class Preco {
         catch (Exception ex) {
             Log.e("JsonError", ex.getMessage());
         }
+    }
+
+    @Override
+    public Object get(String prop) {
+        if (prop.equals("PrecoId") || prop.equals("ID")) {
+            return PrecoId;
+        }
+        else if (prop.equals("Cadastro")) {
+            return Cadastro;
+        }
+        else if (prop.equals("Preco")) {
+            return Preco;
+        }
+        return null;
     }
 }

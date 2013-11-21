@@ -1,5 +1,7 @@
 package com.keto.controlepessoal.classes;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 /**
@@ -10,7 +12,13 @@ public class Local extends ClasseBase {
     public String Descricao;
 
     public Local (JSONObject json) {
-
+        try {
+            this.LocalId = json.getInt("LocalId");
+            this.Descricao = json.getString("Descricao");
+        }
+        catch (Exception ex) {
+            Log.e("JsonError", ex.getMessage());
+        }
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by developer on 13/11/13.
  */
-public class Codigo {
+public class Codigo extends ClasseBase {
     public int CodigoId;
     public Date Cadastro;
     public String Codigo;
@@ -23,5 +23,19 @@ public class Codigo {
         catch (Exception ex) {
             Log.e("JsonError", ex.getMessage());
         }
+    }
+
+    @Override
+    public Object get(String prop) {
+        if (prop.equals("CodigoId") || prop.equals("ID")) {
+            return CodigoId;
+        }
+        else if (prop.equals("Cadastro")) {
+            return Cadastro;
+        }
+        else if (prop.equals("Codigo")) {
+            return Codigo;
+        }
+        return null;
     }
 }

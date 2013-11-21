@@ -17,5 +17,8 @@ namespace ControlePessoalBE.Models
         public DbSet<ProdutoModel> Produtos { get; set; }
         public DbSet<PrecoModel> Precos { get; set; }
         public DbSet<CodigoModel> Codigos { get; set; }
+        public DbSet<CompraModel> Compras { get; set; }
+        public DbSet<ItemDeCompraModel> ItensDeCompra { get; set; }
+        public DbSet<LocalModel> Locais { get; set; }
     }
 }

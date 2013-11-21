@@ -16,6 +16,12 @@ namespace ControlePessoalBE.Models
         [Column(Order = 2)]
         public int? ProdutoID { get; set; }
         public virtual ProdutoModel Produto { get; set; }
+
+        [ForeignKey("ItemDeCompra")]
+        [Column(Order = 3)]
+        public int? ItemDeCompraID { get; set; }
+        public virtual ItemDeCompraModel ItemDeCompra { get; set; }
+
         public double Preco { get; set; }
     }
 }

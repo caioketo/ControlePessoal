@@ -28,17 +28,15 @@ import java.util.ArrayList;
  * Created by developer on 18/11/13.
  */
 public class ComprasListFragment extends Fragment {
+    static final int INDEX = 2;
     static final int VISUALIZAR = 0;
     ListView lstCompras;
     GenericAdapter adapter;
     ArrayList<Compra> Compras;
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public static Fragment newInstance(int sectionNumber) {
+    public static Fragment newInstance() {
         ProdutoListFragment fragment = new ProdutoListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
+        fragment.setHasOptionsMenu(true);
         return fragment;
     }
 
@@ -52,7 +50,7 @@ public class ComprasListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
         lstCompras = (ListView)rootView.findViewById(R.id.lstLista);
         try {
-            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/Compra/Compras", "GET").get();
+            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/API/Compras", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {
                 Compra compra = new Compra(jarray.getJSONObject(i));
@@ -63,7 +61,7 @@ public class ComprasListFragment extends Fragment {
             Log.e("COM", ex.getMessage());
         }
         adapter = new GenericAdapter(Compras, new int[] { R.id.tvwCompraId, R.id.tvwLocal },
-                new String[] { "CompraId", "Local" }, R.layout.compra_item);
+                new String[] { "CompraId", "LocalDescricao" }, R.layout.compra_item);
         lstCompras.setAdapter(adapter);
         registerForContextMenu(lstCompras);
         return rootView;
@@ -91,8 +89,7 @@ public class ComprasListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MercadoAct) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+        ((MercadoAct) activity).onSectionAttached(INDEX);
     }
 
     @Override

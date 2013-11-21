@@ -54,7 +54,13 @@ public class GenericAdapter extends BaseAdapter {
         assert vi != null;
 
         for (int i = 0; i < Ids.length; i++) {
-            ((TextView)vi.findViewById(Ids[i])).setText((String)Lista.get(position).get(Props[i]));
+            Object valor = Lista.get(position).get(Props[i]);
+            if (valor instanceof String) {
+                ((TextView)vi.findViewById(Ids[i])).setText((String)valor);
+            }
+            else {
+                ((TextView)vi.findViewById(Ids[i])).setText(valor.toString());
+            }
         }
 
         return vi;

@@ -3,6 +3,7 @@ package com.keto.controlepessoal.activities.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,9 @@ import com.keto.controlepessoal.R;
 import com.keto.controlepessoal.activities.MercadoAct;
 import com.keto.controlepessoal.classes.Local;
 import com.keto.controlepessoal.classes.adapters.GenericAdapter;
+import com.keto.controlepessoal.util.Communicator;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -24,6 +28,7 @@ import java.util.ArrayList;
  * Created by developer on 19/11/13.
  */
 public class LocaisListFragment extends Fragment {
+    static final int INDEX = 3;
     static final int EXCLUIR = 0;
     static final int EDITAR = 1;
     ListView lstLocais;
@@ -31,11 +36,8 @@ public class LocaisListFragment extends Fragment {
     ArrayList<Local> Locais;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public static Fragment newInstance(int sectionNumber) {
-        ProdutoListFragment fragment = new ProdutoListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
+    public static Fragment newInstance() {
+        LocaisListFragment fragment = new LocaisListFragment();
         fragment.setHasOptionsMenu(true);
         return fragment;
     }
@@ -48,21 +50,22 @@ public class LocaisListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
-        /*lstLocais = (ListView)rootView.findViewById(R.id.lstLista);
+        lstLocais = (ListView)rootView.findViewById(R.id.lstLista);
         try {
-            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/Compra/Compras", "GET").get();
+            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/API/Locais", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {
-                Compra compra = new Compra(jarray.getJSONObject(i));
-                Compras.add(compra);
+                Local local = new Local(jarray.getJSONObject(i));
+                Locais.add(local);
             }
         }
         catch (Exception ex) {
             Log.e("COM", ex.getMessage());
         }
-        adapter = new CompraAdapter(Compras);
+        adapter = new GenericAdapter(Locais, new int[] { R.id.tvwDescricao },
+                new String[] { "Descricao" }, R.layout.local_item);
         lstLocais.setAdapter(adapter);
-        registerForContextMenu(lstLocais);*/
+        registerForContextMenu(lstLocais);
         return rootView;
     }
 
@@ -92,8 +95,7 @@ public class LocaisListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MercadoAct) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+        ((MercadoAct) activity).onSectionAttached(INDEX);
     }
 
     @Override

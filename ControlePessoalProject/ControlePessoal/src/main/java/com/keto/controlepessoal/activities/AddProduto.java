@@ -49,7 +49,7 @@ public class AddProduto extends ActionBarActivity {
         }
         else if (id == R.id.action_salvar) {
             try {
-                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/Produto/CreateProd", "POST",
+                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/CreateProd", "POST",
                         "descricao=" + ((EditText)findViewById(R.id.edtDescricao)).getText().toString() +
                         "&quantidade=" + ((EditText)findViewById(R.id.edtQuantidade)).getText().toString() +
                         "&quantidadeaviso=" + ((EditText)findViewById(R.id.edtQtdeMin)).getText().toString())

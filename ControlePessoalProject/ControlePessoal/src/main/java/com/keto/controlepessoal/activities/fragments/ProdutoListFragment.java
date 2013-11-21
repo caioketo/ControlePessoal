@@ -36,18 +36,16 @@ import java.util.ArrayList;
  * Created by developer on 14/11/13.
  */
 public class ProdutoListFragment extends Fragment {
+    static final int INDEX = 1;
     static final int ADD_CODIGO = 0;
     ListView lstProdutos;
     GenericAdapter adapter;
     ArrayList<Produto> Produtos;
-    private static final String ARG_SECTION_NUMBER = "section_number";
     int SelProdId;
 
-    public static Fragment newInstance(int sectionNumber) {
+    public static Fragment newInstance() {
         ProdutoListFragment fragment = new ProdutoListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
+        fragment.setHasOptionsMenu(true);
         return fragment;
     }
 
@@ -55,13 +53,9 @@ public class ProdutoListFragment extends Fragment {
         Produtos = new ArrayList<Produto>();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
-        lstProdutos = (ListView)rootView.findViewById(R.id.lstLista);
+    public void refresh() {
         try {
-            String jsonProds = new Communicator().execute("http://jangadaserver.no-ip.info/Produto/Produtos", "GET").get();
+            String jsonProds = new Communicator().execute("http://jangadaserver.no-ip.info/API/Produtos", "GET").get();
             JSONArray jarray = new JSONArray(jsonProds);
             for (int i = 0; i < jarray.length(); i++) {
                 Produto prod = new Produto(jarray.getJSONObject(i));
@@ -72,6 +66,14 @@ public class ProdutoListFragment extends Fragment {
         adapter = new GenericAdapter(Produtos, new int[] { R.id.tvwDescricao, R.id.tvwQuantidade },
                 new String[] { "Descricao", "Quantidade" }, R.layout.produto_item);
         lstProdutos.setAdapter(adapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
+        lstProdutos = (ListView)rootView.findViewById(R.id.lstLista);
+        refresh();
         registerForContextMenu(lstProdutos);
         return rootView;
     }
@@ -92,7 +94,7 @@ public class ProdutoListFragment extends Fragment {
 
         if (scan!=null) {
             try {
-                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/Produto/AddCodigo", "POST",
+                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/AddCodigo", "POST",
                         "produtoId=" + SelProdId + "&codigo=" + scan.getContents())
                         .get();
                 Produto prod = new Produto(new JSONObject(jsonProd));
@@ -126,7 +128,7 @@ public class ProdutoListFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     if (!edtCodigo.getText().toString().equals("")) {
                         try {
-                            String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/Produto/AddCodigo", "POST",
+                            String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/AddCodigo", "POST",
                                     "produtoId=" + Produtos.get(info.position).ProdutoId + "&codigo=" + edtCodigo.getText().toString())
                                     .get();
                             Produto prod = new Produto(new JSONObject(jsonProd));
@@ -156,15 +158,14 @@ public class ProdutoListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MercadoAct) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+        ((MercadoAct) activity).onSectionAttached(INDEX);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-
+            ((MercadoAct)getActivity()).setCurrFrag(AddProdutoFragment.newInstance());
         }
         return super.onOptionsItemSelected(item);
     }
