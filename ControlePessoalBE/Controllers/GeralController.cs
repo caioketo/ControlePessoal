@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ControlePessoalBE.Controllers
 {
-    public class APIController : Controller
+    public class GeralController : Controller
     {
         private CPContext db = new CPContext();
 
@@ -85,6 +85,5 @@ namespace ControlePessoalBE.Controllers
 
 
         #endregion
-
     }
 }

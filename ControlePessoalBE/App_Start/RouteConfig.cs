@@ -18,6 +18,12 @@ namespace ControlePessoalBE
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "API",
+                url: "API/{action}/{id}",
+                defaults: new { controller = "API", action = "Produtos", id = UrlParameter.Optional }
+            );
         }
     }
 }
