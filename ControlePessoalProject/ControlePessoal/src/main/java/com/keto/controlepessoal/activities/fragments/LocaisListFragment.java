@@ -3,7 +3,6 @@ package com.keto.controlepessoal.activities.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,7 +59,7 @@ public class LocaisListFragment extends Fragment {
             }
         }
         catch (Exception ex) {
-            Log.e("COM", ex.getMessage());
+            ex.printStackTrace();
         }
         adapter = new GenericAdapter(Locais, new int[] { R.id.tvwDescricao },
                 new String[] { "Descricao" }, R.layout.local_item);

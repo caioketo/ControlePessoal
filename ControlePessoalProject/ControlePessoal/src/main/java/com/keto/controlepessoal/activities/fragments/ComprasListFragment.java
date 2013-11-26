@@ -3,7 +3,6 @@ package com.keto.controlepessoal.activities.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,7 +34,7 @@ public class ComprasListFragment extends Fragment {
     ArrayList<Compra> Compras;
 
     public static Fragment newInstance() {
-        ProdutoListFragment fragment = new ProdutoListFragment();
+        ComprasListFragment fragment = new ComprasListFragment();
         fragment.setHasOptionsMenu(true);
         return fragment;
     }
@@ -58,7 +57,7 @@ public class ComprasListFragment extends Fragment {
             }
         }
         catch (Exception ex) {
-            Log.e("COM", ex.getMessage());
+            ex.printStackTrace();
         }
         adapter = new GenericAdapter(Compras, new int[] { R.id.tvwCompraId, R.id.tvwLocal },
                 new String[] { "CompraId", "LocalDescricao" }, R.layout.compra_item);
@@ -96,7 +95,7 @@ public class ComprasListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-
+            ((MercadoAct)getActivity()).setCurrFrag(AddCompraFragment.newInstance());
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,6 +2,7 @@ package com.keto.controlepessoal.classes;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -41,5 +42,28 @@ public class ItemDeCompra extends ClasseBase {
             return Preco.Preco;
         }
         return null;
+    }
+
+    @Override
+    public String getJSONString() {
+        JSONObject objeto = new JSONObject();
+        try {
+            objeto.put("ItemId", ItemId);
+            if (Produto != null) {
+                objeto.put("Produto", new JSONObject(Produto.getJSONString()));
+            }
+            else {
+                objeto.put("Produto", null);
+            }
+            if (Preco != null) {
+                objeto.put("Preco", new JSONObject(Preco.getJSONString()));
+            }
+            else {
+                objeto.put("Preco", null);
+            }
+        } catch (JSONException e) {
+            Log.e("JSON", e.getMessage());
+        }
+        return objeto.toString();
     }
 }

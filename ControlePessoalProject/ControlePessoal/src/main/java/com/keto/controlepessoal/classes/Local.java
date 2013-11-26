@@ -2,6 +2,7 @@ package com.keto.controlepessoal.classes;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -30,5 +31,17 @@ public class Local extends ClasseBase {
             return Descricao;
         }
         return null;
+    }
+
+    @Override
+    public String getJSONString() {
+        JSONObject objeto = new JSONObject();
+        try {
+            objeto.put("LocalId", LocalId);
+            objeto.put("Descricao", Descricao);
+        } catch (JSONException e) {
+            Log.e("JSON", e.getMessage());
+        }
+        return objeto.toString();
     }
 }

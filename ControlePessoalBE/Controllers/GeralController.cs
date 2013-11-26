@@ -63,6 +63,12 @@ namespace ControlePessoalBE.Controllers
             return Json(db.Compras.ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult CreateCompra(CompraModel compramodel)
+        {
+            return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
 
         #endregion
 

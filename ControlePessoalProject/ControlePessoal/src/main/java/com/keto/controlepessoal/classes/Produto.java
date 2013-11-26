@@ -3,6 +3,7 @@ package com.keto.controlepessoal.classes;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -17,6 +18,12 @@ public class Produto extends ClasseBase {
     public double QuantidadeAviso;
     public ArrayList<Codigo> Codigos;
     public ArrayList<Preco> Precos;
+
+    public Produto() {
+        Codigos = new ArrayList<Codigo>();
+        Precos = new ArrayList<Preco>();
+    }
+
 
     public Produto(JSONObject json) {
         Codigos = new ArrayList<Codigo>();
@@ -61,5 +68,30 @@ public class Produto extends ClasseBase {
             return Precos;
         }
         return null;
+    }
+
+    @Override
+    public String getJSONString() {
+        JSONObject objeto = new JSONObject();
+        try {
+            objeto.put("ProdutoId", ProdutoId);
+            objeto.put("Descricao", Descricao);
+            objeto.put("Quantidade", Quantidade);
+            objeto.put("QuantidadeAviso", QuantidadeAviso);
+            JSONArray array = new JSONArray();
+            for (int i = 0; i < Codigos.size(); i++) {
+                array.put(new JSONObject(Codigos.get(i).getJSONString()));
+            }
+            objeto.put("Codigos", array);
+
+            JSONArray array2 = new JSONArray();
+            for (int i = 0; i < Precos.size(); i++) {
+                array2.put(new JSONObject(Precos.get(i).getJSONString()));
+            }
+            objeto.put("Precos", array2);
+        } catch (JSONException e) {
+            Log.e("JSON", e.getMessage());
+        }
+        return objeto.toString();
     }
 }

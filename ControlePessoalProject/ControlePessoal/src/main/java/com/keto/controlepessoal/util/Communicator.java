@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by developer on 01/11/13.
  */
 public class Communicator extends AsyncTask<String, Void, String> {
-    public static String DefURL = "http://jangadaserver.no-ip.info/Geral/";
+    public static String DefURL = "http://127.0.0.1:8738/Geral/";//"http://jangadaserver.no-ip.info/Geral/";
     @Override
     protected String doInBackground(String... Urls) {
         String url = DefURL + Urls[0];
@@ -59,18 +60,24 @@ public class Communicator extends AsyncTask<String, Void, String> {
             // HTTP POST
             try {
                 String data = Urls[2];
-                String[] datas = data.split("&");
-                HttpClient httpclient = new DefaultHttpClient(); // for port 80 requests!
-                HttpPost httppost = new HttpPost(url);
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                for (int i = 0; i < datas.length; i++) {
-                    String[] keyPar = datas[i].split("=");
-                    nameValuePairs.add(new BasicNameValuePair(keyPar[0], keyPar[1]));
+                HttpResponse response;
+                if (data == "JSON") {
+                    response = makeJSONRequest(url, Urls[3]);
                 }
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
+                else {
+                    String[] datas = data.split("&");
+                    HttpClient httpclient = new DefaultHttpClient(); // for port 80 requests!
+                    HttpPost httppost = new HttpPost(url);
+                    // Add your data
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                    for (int i = 0; i < datas.length; i++) {
+                        String[] keyPar = datas[i].split("=");
+                        nameValuePairs.add(new BasicNameValuePair(keyPar[0], keyPar[1]));
+                    }
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    // Execute HTTP Post Request
+                    response = httpclient.execute(httppost);
+                }
                 HttpEntity entity = response.getEntity();
                 is = entity.getContent();
             } catch(Exception e) {
@@ -93,5 +100,27 @@ public class Communicator extends AsyncTask<String, Void, String> {
             return result;
         }
         return "";
+    }
+
+
+    public static HttpResponse makeJSONRequest(String path, String json) throws Exception
+    {
+        //instantiates httpclient to make request
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+
+        //url with the post data
+        HttpPost httpost = new HttpPost(path);
+
+        //passes the results to a string builder/entity
+        StringEntity se = new StringEntity(json);
+
+        //sets the post request as the resulting string
+        httpost.setEntity(se);
+        //sets a request header so the page receving the request
+        //will know what to do with it
+        httpost.setHeader("Accept", "application/json");
+        httpost.setHeader("Content-type", "application/json");
+
+        return httpclient.execute(httpost);
     }
 }

@@ -2,6 +2,7 @@ package com.keto.controlepessoal.classes;
 
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -37,5 +38,18 @@ public class Codigo extends ClasseBase {
             return Codigo;
         }
         return null;
+    }
+
+    @Override
+    public String getJSONString() {
+        JSONObject objeto = new JSONObject();
+        try {
+            objeto.put("CodigoId", CodigoId);
+            objeto.put("Cadastro", Cadastro);
+            objeto.put("Codigo", Codigo);
+        } catch (JSONException e) {
+            Log.e("JSON", e.getMessage());
+        }
+        return objeto.toString();
     }
 }

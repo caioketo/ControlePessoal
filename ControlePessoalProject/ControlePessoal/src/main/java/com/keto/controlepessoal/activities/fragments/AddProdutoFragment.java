@@ -71,6 +71,6 @@ public class AddProdutoFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.add_produto, menu);
+        inflater.inflate(R.menu.add_default, menu);
     }
 }

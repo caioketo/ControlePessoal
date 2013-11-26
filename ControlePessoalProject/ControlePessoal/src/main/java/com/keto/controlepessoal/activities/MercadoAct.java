@@ -49,7 +49,8 @@ public class MercadoAct extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         String[] tmp = { getString(R.string.title_produtos), getString(R.string.title_compras),
-                getString(R.string.title_locais), getString(R.string.title_add_produto) };
+                getString(R.string.title_locais), getString(R.string.title_add_produto),
+                getString(R.string.title_add_compra) };
         Titulos = tmp;
     }
 

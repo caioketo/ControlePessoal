@@ -5,4 +5,5 @@ package com.keto.controlepessoal.classes;
  */
 public abstract class ClasseBase {
     public abstract Object get(String prop);
+    public abstract String getJSONString();
 }

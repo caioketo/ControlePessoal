@@ -3,6 +3,7 @@ package com.keto.controlepessoal.classes;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ public class Compra extends ClasseBase {
     public int CompraId;
     public Local Local;
     public ArrayList<ItemDeCompra> Itens;
+
+    public Compra() {
+        Itens = new ArrayList<ItemDeCompra>();
+    }
 
     public Compra(JSONObject json) {
         Itens = new ArrayList<ItemDeCompra>();
@@ -45,5 +50,28 @@ public class Compra extends ClasseBase {
             return Itens;
         }
         return null;
+    }
+
+    @Override
+    public String getJSONString() {
+        JSONObject objeto = new JSONObject();
+        try {
+            objeto.put("CompraId", CompraId);
+            if (this.Local != null) {
+                JSONObject localJ = new JSONObject(this.Local.getJSONString());
+                objeto.put("Local", localJ);
+            }
+            else {
+                objeto.put("Local", null);
+            }
+            JSONArray array = new JSONArray();
+            for (int i = 0; i < Itens.size(); i++) {
+                array.put(new JSONObject(Itens.get(i).getJSONString()));
+            }
+            objeto.put("Itens", array);
+        } catch (JSONException e) {
+            Log.e("JSON", e.getMessage());
+        }
+        return objeto.toString();
     }
 }
