@@ -52,7 +52,7 @@ public class LocaisListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
         lstLocais = (ListView)rootView.findViewById(R.id.lstLista);
         try {
-            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/API/Locais", "GET").get();
+            String jsonCompras = new Communicator().execute("Locais", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {
                 Local local = new Local(jarray.getJSONObject(i));

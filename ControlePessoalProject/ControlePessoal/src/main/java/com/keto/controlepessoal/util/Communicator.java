@@ -22,9 +22,10 @@ import java.util.List;
  * Created by developer on 01/11/13.
  */
 public class Communicator extends AsyncTask<String, Void, String> {
+    public static String DefURL = "http://jangadaserver.no-ip.info/Geral/";
     @Override
     protected String doInBackground(String... Urls) {
-        String url = Urls[0];
+        String url = DefURL + Urls[0];
         InputStream is = null;
         String result = "";
         if (Urls[1] == "GET") {

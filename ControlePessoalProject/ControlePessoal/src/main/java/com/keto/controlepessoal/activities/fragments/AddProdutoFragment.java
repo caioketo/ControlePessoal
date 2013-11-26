@@ -54,7 +54,7 @@ public class AddProdutoFragment extends Fragment {
         }
         else if (id == R.id.action_salvar) {
             try {
-                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/CreateProd", "POST",
+                String jsonProd = new Communicator().execute("CreateProd", "POST",
                         "descricao=" + ((EditText)RootView.findViewById(R.id.edtDescricao)).getText().toString() +
                                 "&quantidade=" + ((EditText)RootView.findViewById(R.id.edtQuantidade)).getText().toString() +
                                 "&quantidadeaviso=" + ((EditText)RootView.findViewById(R.id.edtQtdeMin)).getText().toString())

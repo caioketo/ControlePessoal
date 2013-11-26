@@ -50,7 +50,7 @@ public class ComprasListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
         lstCompras = (ListView)rootView.findViewById(R.id.lstLista);
         try {
-            String jsonCompras = new Communicator().execute("http://jangadaserver.no-ip.info/API/Compras", "GET").get();
+            String jsonCompras = new Communicator().execute("Compras", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {
                 Compra compra = new Compra(jarray.getJSONObject(i));

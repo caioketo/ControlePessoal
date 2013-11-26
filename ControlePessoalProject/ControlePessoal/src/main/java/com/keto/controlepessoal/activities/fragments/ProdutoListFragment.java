@@ -55,7 +55,7 @@ public class ProdutoListFragment extends Fragment {
 
     public void refresh() {
         try {
-            String jsonProds = new Communicator().execute("http://jangadaserver.no-ip.info/API/Produtos", "GET").get();
+            String jsonProds = new Communicator().execute("Produtos", "GET").get();
             JSONArray jarray = new JSONArray(jsonProds);
             for (int i = 0; i < jarray.length(); i++) {
                 Produto prod = new Produto(jarray.getJSONObject(i));
@@ -94,7 +94,7 @@ public class ProdutoListFragment extends Fragment {
 
         if (scan!=null) {
             try {
-                String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/AddCodigo", "POST",
+                String jsonProd = new Communicator().execute("AddCodigo", "POST",
                         "produtoId=" + SelProdId + "&codigo=" + scan.getContents())
                         .get();
                 Produto prod = new Produto(new JSONObject(jsonProd));
@@ -128,7 +128,7 @@ public class ProdutoListFragment extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     if (!edtCodigo.getText().toString().equals("")) {
                         try {
-                            String jsonProd = new Communicator().execute("http://jangadaserver.no-ip.info/API/AddCodigo", "POST",
+                            String jsonProd = new Communicator().execute("AddCodigo", "POST",
                                     "produtoId=" + Produtos.get(info.position).ProdutoId + "&codigo=" + edtCodigo.getText().toString())
                                     .get();
                             Produto prod = new Produto(new JSONObject(jsonProd));
