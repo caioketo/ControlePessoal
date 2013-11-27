@@ -14,17 +14,20 @@ import android.widget.EditText;
 
 import com.keto.controlepessoal.R;
 import com.keto.controlepessoal.activities.MercadoAct;
+import com.keto.controlepessoal.classes.Produto;
 import com.keto.controlepessoal.util.Communicator;
 
 /**
  * Created by developer on 21/11/13.
  */
-public class AddProdutoFragment extends Fragment {
+public class AddProdutoFragment extends Fragment implements ICFragment {
     static final int INDEX = 4;
     private View RootView;
+    private ProdutoListFragment listFragment;
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(ProdutoListFragment listFragment) {
         AddProdutoFragment fragment = new AddProdutoFragment();
+        fragment.listFragment = listFragment;
         fragment.setHasOptionsMenu(true);
         return fragment;
     }
@@ -49,21 +52,22 @@ public class AddProdutoFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_cancelar) {
-            ((MercadoAct)getActivity()).setCurrFrag(ProdutoListFragment.newInstance());
+            ((MercadoAct)getActivity()).setCurrFrag(listFragment);
             return true;
         }
         else if (id == R.id.action_salvar) {
             try {
-                String jsonProd = new Communicator().execute("CreateProd", "POST",
-                        "descricao=" + ((EditText)RootView.findViewById(R.id.edtDescricao)).getText().toString() +
-                                "&quantidade=" + ((EditText)RootView.findViewById(R.id.edtQuantidade)).getText().toString() +
-                                "&quantidadeaviso=" + ((EditText)RootView.findViewById(R.id.edtQtdeMin)).getText().toString())
-                        .get();
+                Produto nProduto = new Produto();
+                nProduto.Descricao = ((EditText)RootView.findViewById(R.id.edtDescricao)).getText().toString();
+                nProduto.Quantidade = Double.parseDouble(((EditText)RootView.findViewById(R.id.edtQuantidade)).getText().toString());
+                nProduto.QuantidadeAviso = Double.parseDouble(((EditText)RootView.findViewById(R.id.edtQtdeMin)).getText().toString());
+                String jsonProd = new Communicator().execute("CreateProd", "POST", "JSON",
+                        nProduto.getJSONString()).get();
             }
             catch (Exception ex) {
                 Log.e("COM", ex.getMessage());
             }
-            ((MercadoAct)getActivity()).setCurrFrag(ProdutoListFragment.newInstance());
+            ((MercadoAct)getActivity()).setCurrFrag(listFragment);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -72,5 +76,10 @@ public class AddProdutoFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.add_default, menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ((MercadoAct)getActivity()).setCurrFrag(listFragment);
     }
 }

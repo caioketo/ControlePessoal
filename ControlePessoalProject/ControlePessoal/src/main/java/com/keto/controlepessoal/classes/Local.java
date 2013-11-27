@@ -12,6 +12,8 @@ public class Local extends ClasseBase {
     public int LocalId;
     public String Descricao;
 
+    public Local() { }
+
     public Local (JSONObject json) {
         try {
             this.LocalId = json.getInt("LocalId");
@@ -34,7 +36,7 @@ public class Local extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("LocalId", LocalId);
@@ -42,6 +44,6 @@ public class Local extends ClasseBase {
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Created by developer on 14/11/13.
  */
-public class ProdutoListFragment extends Fragment {
+public class ProdutoListFragment extends Fragment implements ICFragment {
     static final int INDEX = 1;
     static final int ADD_CODIGO = 0;
     ListView lstProdutos;
@@ -165,7 +165,7 @@ public class ProdutoListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            ((MercadoAct)getActivity()).setCurrFrag(AddProdutoFragment.newInstance());
+            ((MercadoAct)getActivity()).setCurrFrag(AddProdutoFragment.newInstance(this));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -173,5 +173,10 @@ public class ProdutoListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.compras, menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ((MercadoAct)getActivity()).close();
     }
 }

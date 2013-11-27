@@ -15,6 +15,8 @@ public class Preco extends ClasseBase {
     public Date Cadastro;
     public double Preco;
 
+    public Preco() { }
+
     public Preco(JSONObject json) {
         try {
             this.PrecoId = json.getInt("PrecoId");
@@ -41,7 +43,7 @@ public class Preco extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("PrecoId", PrecoId);
@@ -50,6 +52,6 @@ public class Preco extends ClasseBase {
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

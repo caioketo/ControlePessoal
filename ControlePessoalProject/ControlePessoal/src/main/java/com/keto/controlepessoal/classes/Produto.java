@@ -71,7 +71,7 @@ public class Produto extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("ProdutoId", ProdutoId);
@@ -80,18 +80,18 @@ public class Produto extends ClasseBase {
             objeto.put("QuantidadeAviso", QuantidadeAviso);
             JSONArray array = new JSONArray();
             for (int i = 0; i < Codigos.size(); i++) {
-                array.put(new JSONObject(Codigos.get(i).getJSONString()));
+                array.put(Codigos.get(i).getJSON());
             }
             objeto.put("Codigos", array);
 
             JSONArray array2 = new JSONArray();
             for (int i = 0; i < Precos.size(); i++) {
-                array2.put(new JSONObject(Precos.get(i).getJSONString()));
+                array2.put(Precos.get(i).getJSON());
             }
             objeto.put("Precos", array2);
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

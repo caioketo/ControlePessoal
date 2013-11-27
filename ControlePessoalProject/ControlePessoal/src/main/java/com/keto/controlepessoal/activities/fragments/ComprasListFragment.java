@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by developer on 18/11/13.
  */
-public class ComprasListFragment extends Fragment {
+public class ComprasListFragment extends Fragment implements ICFragment {
     static final int INDEX = 2;
     static final int VISUALIZAR = 0;
     ListView lstCompras;
@@ -95,7 +95,7 @@ public class ComprasListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            ((MercadoAct)getActivity()).setCurrFrag(AddCompraFragment.newInstance());
+            ((MercadoAct)getActivity()).setCurrFrag(AddCompraFragment.newInstance(this));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -103,6 +103,11 @@ public class ComprasListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.compras, menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ((MercadoAct)getActivity()).close();
     }
 }
 

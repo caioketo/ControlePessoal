@@ -13,6 +13,8 @@ public class ItemDeCompra extends ClasseBase {
     public Produto Produto;
     public Preco Preco;
 
+    public ItemDeCompra() { }
+
     public ItemDeCompra(JSONObject json) {
         try {
             this.ItemId = json.getInt("ItemId");
@@ -45,18 +47,18 @@ public class ItemDeCompra extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("ItemId", ItemId);
             if (Produto != null) {
-                objeto.put("Produto", new JSONObject(Produto.getJSONString()));
+                objeto.put("Produto", Produto.getJSON());
             }
             else {
                 objeto.put("Produto", null);
             }
             if (Preco != null) {
-                objeto.put("Preco", new JSONObject(Preco.getJSONString()));
+                objeto.put("Preco", Preco.getJSON());
             }
             else {
                 objeto.put("Preco", null);
@@ -64,6 +66,6 @@ public class ItemDeCompra extends ClasseBase {
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

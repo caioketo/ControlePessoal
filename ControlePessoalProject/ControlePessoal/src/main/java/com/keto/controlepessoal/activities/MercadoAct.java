@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.keto.controlepessoal.R;
-import com.keto.controlepessoal.activities.fragments.AddProdutoFragment;
 import com.keto.controlepessoal.activities.fragments.ComprasListFragment;
+import com.keto.controlepessoal.activities.fragments.ICFragment;
 import com.keto.controlepessoal.activities.fragments.LocaisListFragment;
 import com.keto.controlepessoal.activities.fragments.ProdutoListFragment;
 
@@ -100,6 +100,7 @@ public class MercadoAct extends ActionBarActivity
             restoreActionBar();
             return super.onCreateOptionsMenu(menu);
         }
+        menu.clear();
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,12 +111,10 @@ public class MercadoAct extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        if (CurrFrag instanceof AddProdutoFragment) {
-            setCurrFrag(ProdutoListFragment.newInstance());
-        }
-        else {
-            super.onBackPressed();
-        }
+        ((ICFragment)CurrFrag).onBackPressed();
     }
 
+    public void close() {
+        super.onBackPressed();
+    }
 }

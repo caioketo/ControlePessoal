@@ -1,6 +1,8 @@
 package com.keto.controlepessoal.activities.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.keto.controlepessoal.R;
@@ -26,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by developer on 19/11/13.
  */
-public class LocaisListFragment extends Fragment {
+public class LocaisListFragment extends Fragment implements ICFragment {
     static final int INDEX = 3;
     static final int EXCLUIR = 0;
     static final int EDITAR = 1;
@@ -45,11 +48,8 @@ public class LocaisListFragment extends Fragment {
         Locais = new ArrayList<Local>();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
-        lstLocais = (ListView)rootView.findViewById(R.id.lstLista);
+
+    public void refresh() {
         try {
             String jsonCompras = new Communicator().execute("Locais", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
@@ -58,12 +58,18 @@ public class LocaisListFragment extends Fragment {
                 Locais.add(local);
             }
         }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        catch (Exception ex) { }
         adapter = new GenericAdapter(Locais, new int[] { R.id.tvwDescricao },
                 new String[] { "Descricao" }, R.layout.local_item);
         lstLocais.setAdapter(adapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
+        lstLocais = (ListView)rootView.findViewById(R.id.lstLista);
+        refresh();
         registerForContextMenu(lstLocais);
         return rootView;
     }
@@ -101,13 +107,44 @@ public class LocaisListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-
+            View dialogView = getActivity().getLayoutInflater().inflate(R.layout.add_local, null);
+            AlertDialog.Builder builder =  new AlertDialog.Builder(getActivity());
+            final EditText edtDescricao = (EditText)dialogView.findViewById(R.id.edtDescricao);
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    if (!edtDescricao.getText().toString().isEmpty()) {
+                        Local nLocal = new Local();
+                        nLocal.Descricao = edtDescricao.getText().toString();
+                        try {
+                            String jsonLocal = new Communicator().execute("CreateLocal", "POST", "JSON",
+                                    nLocal.getJSONString())
+                                    .get();
+                            refresh();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    //
+                }
+            });
+            builder.setView(dialogView);
+            final AlertDialog dialog = builder.create ();
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.global, menu);
+        inflater.inflate(R.menu.compras, menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ((MercadoAct)getActivity()).close();
     }
 }

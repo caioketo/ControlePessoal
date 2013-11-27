@@ -53,25 +53,24 @@ public class Compra extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("CompraId", CompraId);
             if (this.Local != null) {
-                JSONObject localJ = new JSONObject(this.Local.getJSONString());
-                objeto.put("Local", localJ);
+                objeto.put("Local", this.Local.getJSON());
             }
             else {
                 objeto.put("Local", null);
             }
             JSONArray array = new JSONArray();
             for (int i = 0; i < Itens.size(); i++) {
-                array.put(new JSONObject(Itens.get(i).getJSONString()));
+                array.put(Itens.get(i).getJSON());
             }
             objeto.put("Itens", array);
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

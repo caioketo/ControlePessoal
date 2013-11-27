@@ -21,6 +21,9 @@ public class GenericAdapter extends BaseAdapter {
     private int[] Ids;
     private String[] Props;
     private int LayoutId;
+    private View vi;
+    private View.OnClickListener listener;
+    private int buttonId;
 
     public GenericAdapter(ArrayList<? extends ClasseBase> data, int[] ids, String[] props, int layout) {
         Lista = data;
@@ -28,6 +31,20 @@ public class GenericAdapter extends BaseAdapter {
         Ids = ids;
         Props = props;
         LayoutId = layout;
+        buttonId = -1;
+        listener = null;
+    }
+
+    public void setButton(int buttonId, View.OnClickListener listener) {
+        this.buttonId = buttonId;
+        this.listener = listener;
+    }
+
+    public View findViewById(int id) {
+        if (vi == null) {
+            vi = inflater.inflate(LayoutId, null);
+        }
+        return vi.findViewById(id);
     }
 
     @Override
@@ -42,12 +59,12 @@ public class GenericAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return (Long)Lista.get(position).get("ID");
+        return (Integer)Lista.get(position).get("ID");
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View vi=convertView;
+        vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(LayoutId, null);
 
@@ -61,6 +78,11 @@ public class GenericAdapter extends BaseAdapter {
             else {
                 ((TextView)vi.findViewById(Ids[i])).setText(valor.toString());
             }
+        }
+
+
+        if (buttonId > 0 && listener != null) {
+            vi.findViewById(buttonId).setOnClickListener(listener);
         }
 
         return vi;

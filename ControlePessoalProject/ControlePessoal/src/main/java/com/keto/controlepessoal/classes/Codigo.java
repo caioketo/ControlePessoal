@@ -41,7 +41,7 @@ public class Codigo extends ClasseBase {
     }
 
     @Override
-    public String getJSONString() {
+    public JSONObject getJSON() {
         JSONObject objeto = new JSONObject();
         try {
             objeto.put("CodigoId", CodigoId);
@@ -50,6 +50,6 @@ public class Codigo extends ClasseBase {
         } catch (JSONException e) {
             Log.e("JSON", e.getMessage());
         }
-        return objeto.toString();
+        return objeto;
     }
 }

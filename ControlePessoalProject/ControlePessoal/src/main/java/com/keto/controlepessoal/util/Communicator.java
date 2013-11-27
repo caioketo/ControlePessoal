@@ -23,7 +23,7 @@ import java.util.List;
  * Created by developer on 01/11/13.
  */
 public class Communicator extends AsyncTask<String, Void, String> {
-    public static String DefURL = "http://127.0.0.1:8738/Geral/";//"http://jangadaserver.no-ip.info/Geral/";
+    public static String DefURL = "http://jangadaserver.no-ip.info/Geral/";
     @Override
     protected String doInBackground(String... Urls) {
         String url = DefURL + Urls[0];
