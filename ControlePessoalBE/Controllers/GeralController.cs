@@ -53,6 +53,15 @@ namespace ControlePessoalBE.Controllers
             db.SaveChanges();
             return Json(produto, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult CreateProd(ProdutoModel produto)
+        {
+            produto = db.Produtos.Add(produto);
+            db.SaveChanges();
+            return Json(produto, JsonRequestBehavior.AllowGet);
+        }
+
         //
         #endregion
 
@@ -66,7 +75,9 @@ namespace ControlePessoalBE.Controllers
         [HttpPost]
         public JsonResult CreateCompra(CompraModel compramodel)
         {
-            return Json("OK", JsonRequestBehavior.AllowGet);
+            compramodel = db.Compras.Add(compramodel);
+            db.SaveChanges();
+            return Json(compramodel, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -80,10 +91,8 @@ namespace ControlePessoalBE.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateLocal(string descricao)
+        public JsonResult CreateLocal(LocalModel local)
         {
-            LocalModel local = new LocalModel();
-            local.Descricao = descricao;
             local = db.Locais.Add(local);
             db.SaveChanges();
             return Json(local, JsonRequestBehavior.AllowGet);
