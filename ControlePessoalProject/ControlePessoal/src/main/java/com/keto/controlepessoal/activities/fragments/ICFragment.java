@@ -5,4 +5,5 @@ package com.keto.controlepessoal.activities.fragments;
  */
 public interface ICFragment {
     public void onBackPressed();
+    public void refresh();
 }

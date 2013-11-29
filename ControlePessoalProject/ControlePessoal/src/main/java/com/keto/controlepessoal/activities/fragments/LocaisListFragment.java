@@ -48,7 +48,7 @@ public class LocaisListFragment extends Fragment implements ICFragment {
         Locais = new ArrayList<Local>();
     }
 
-
+    @Override
     public void refresh() {
         try {
             String jsonCompras = new Communicator().execute("Locais", "GET").get();

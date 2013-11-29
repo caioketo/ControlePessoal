@@ -69,9 +69,16 @@ public class MercadoAct extends ActionBarActivity
         refreshFragment();
     }
 
-    public void setCurrFrag(Fragment frag) {
+    public void setCurrFrag(Fragment frag, boolean refresh) {
         CurrFrag = frag;
         refreshFragment();
+        if (refresh) {
+            ((ICFragment)CurrFrag).refresh();
+        }
+    }
+
+    public void setCurrFrag(Fragment frag) {
+        setCurrFrag(frag, false);
     }
 
     public void refreshFragment() {

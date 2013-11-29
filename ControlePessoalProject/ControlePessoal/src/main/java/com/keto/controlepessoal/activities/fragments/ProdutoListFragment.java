@@ -53,6 +53,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
         Produtos = new ArrayList<Produto>();
     }
 
+    @Override
     public void refresh() {
         try {
             String jsonProds = new Communicator().execute("Produtos", "GET").get();

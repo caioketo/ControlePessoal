@@ -44,10 +44,7 @@ public class ComprasListFragment extends Fragment implements ICFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
-        lstCompras = (ListView)rootView.findViewById(R.id.lstLista);
+    public void refresh() {
         try {
             String jsonCompras = new Communicator().execute("Compras", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
@@ -62,6 +59,14 @@ public class ComprasListFragment extends Fragment implements ICFragment {
         adapter = new GenericAdapter(Compras, new int[] { R.id.tvwCompraId, R.id.tvwLocal },
                 new String[] { "CompraId", "LocalDescricao" }, R.layout.compra_item);
         lstCompras.setAdapter(adapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_produtos_lista, container, false);
+        lstCompras = (ListView)rootView.findViewById(R.id.lstLista);
+        refresh();
         registerForContextMenu(lstCompras);
         return rootView;
     }

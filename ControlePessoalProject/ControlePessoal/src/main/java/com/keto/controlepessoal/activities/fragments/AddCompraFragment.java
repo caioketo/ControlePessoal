@@ -181,7 +181,7 @@ public class AddCompraFragment extends Fragment implements ICFragment {
             catch (Exception ex) {
                 ex.printStackTrace();
             }
-            ((MercadoAct)getActivity()).setCurrFrag(listFragment);
+            ((MercadoAct)getActivity()).setCurrFrag(listFragment, true);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -195,5 +195,10 @@ public class AddCompraFragment extends Fragment implements ICFragment {
     @Override
     public void onBackPressed() {
         ((MercadoAct)getActivity()).setCurrFrag(listFragment);
+    }
+
+    @Override
+    public void refresh() {
+
     }
 }
