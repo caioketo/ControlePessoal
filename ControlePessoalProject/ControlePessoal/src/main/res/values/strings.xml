@@ -29,6 +29,7 @@
     <string name="visualizar">Visualizar</string>
     <string name="local">Local</string>
     <string name="add_item">Adicionar Item</string>
+    <string name="codigos">Códigos</string>
     <string name="err_compra_semitem">Não é possível adicionar uma compra sem item</string><string name="produto">Produto</string><string name="preco">Preço</string>
 
 </resources>

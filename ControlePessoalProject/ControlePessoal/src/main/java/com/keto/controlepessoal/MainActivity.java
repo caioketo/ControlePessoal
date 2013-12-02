@@ -69,10 +69,10 @@ public class MainActivity extends ActionBarActivity {
                 i);
 
         if (scan!=null) {
-            Toast.makeText(this, scan.getContents(), Toast.LENGTH_LONG);
+            Toast.makeText(this, scan.getContents(), Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(this, "SCAN NULL", Toast.LENGTH_LONG);
+            Toast.makeText(this, "SCAN NULL", Toast.LENGTH_LONG).show();
         }
     }
 

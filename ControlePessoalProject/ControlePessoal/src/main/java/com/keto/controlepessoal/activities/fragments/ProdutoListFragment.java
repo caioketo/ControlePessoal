@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class ProdutoListFragment extends Fragment implements ICFragment {
     static final int INDEX = 1;
     static final int ADD_CODIGO = 0;
+    static final int CODIGOS = 1;
     ListView lstProdutos;
     GenericAdapter adapter;
     ArrayList<Produto> Produtos;
@@ -85,6 +86,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle(getString(R.string.opcoes));
         menu.add(Menu.NONE, ADD_CODIGO, ADD_CODIGO, getString(R.string.add_codigo));
+        menu.add(Menu.NONE, CODIGOS, CODIGOS, getString(R.string.codigos));
     }
 
     @Override
@@ -150,6 +152,10 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
             final AlertDialog dialog = builder.create();
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             dialog.show();
+        }
+        else if (menuItemIndex == CODIGOS) {
+            SelProdId = Produtos.get(info.position).ProdutoId;
+            ((MercadoAct)getActivity()).setCurrFrag(CodigosListFragment.newInstance(SelProdId, this));
         }
 
         return true;

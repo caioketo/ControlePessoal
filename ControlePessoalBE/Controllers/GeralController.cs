@@ -42,6 +42,11 @@ namespace ControlePessoalBE.Controllers
             return Json(db.Produtos.Where(p => p.ProdutoId == db.Codigos.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault().ProdutoID).First(), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Codigos(int produtoId)
+        {
+            return Json(db.Codigos.Where(c => c.ProdutoID == produtoId).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult CreateProd(string descricao, double quantidade, double quantidadeaviso)
         {
