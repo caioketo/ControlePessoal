@@ -48,7 +48,7 @@ namespace ControlePessoalBE.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateProd(string descricao, double quantidade, double quantidadeaviso)
+        public JsonResult CreateProdSTR(string descricao, double quantidade, double quantidadeaviso)
         {
             ProdutoModel produto = new ProdutoModel();
             produto.Descricao = descricao;

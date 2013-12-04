@@ -1,6 +1,7 @@
 package com.keto.controlepessoal.util;
 
 import android.os.AsyncTask;
+import android.os.Build;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,10 +24,22 @@ import java.util.List;
  * Created by developer on 01/11/13.
  */
 public class Communicator extends AsyncTask<String, Void, String> {
-    public static String DefURL = "http://jangadaserver.no-ip.info/Geral/";
+    public static String EmuURL = "http://jangadaserver.no-ip.info/Geral/";
+    public static String LocalURL = "http://192.168.25.2/Geral/";
+
+    public static String getURL() {
+        if (Build.MODEL.contains("google_sdk") ||
+                Build.MODEL.contains("Emulator") ||
+                Build.MODEL.contains("Android SDK")) {
+            return EmuURL;
+        }
+        else {
+            return LocalURL;
+        }
+    }
     @Override
     protected String doInBackground(String... Urls) {
-        String url = DefURL + Urls[0];
+        String url = getURL() + Urls[0];
         InputStream is = null;
         String result = "";
         if (Urls[1] == "GET") {
