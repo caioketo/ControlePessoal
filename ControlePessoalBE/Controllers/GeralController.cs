@@ -81,6 +81,18 @@ namespace ControlePessoalBE.Controllers
         //
         #endregion
 
+        #region Alertas
+        public JsonResult Alertas()
+        {
+            List<ProdutoJson> prods = new List<ProdutoJson>();
+            foreach (ProdutoModel produto in db.Produtos.Where(p => p.Quantidade <= p.QuantidadeAviso).ToList())
+            {
+                prods.Add(new ProdutoJson(produto));
+            }
+            return Json(prods, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Compras
         //COMPRAS
         public JsonResult Compras()

@@ -2,6 +2,8 @@ package com.keto.controlepessoal.classes;
 
 import android.util.Log;
 
+import com.keto.controlepessoal.util.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +20,7 @@ public class Codigo extends ClasseBase {
     public Codigo(JSONObject json) {
         try {
             this.CodigoId = json.getInt("CodigoId");
-            this.Cadastro = (Date)json.get("Cadastro");
+            this.Cadastro = Utils.JsonDateToDate(json.getString("Cadastro"));
             this.Codigo = json.getString("Codigo");
         }
         catch (Exception ex) {

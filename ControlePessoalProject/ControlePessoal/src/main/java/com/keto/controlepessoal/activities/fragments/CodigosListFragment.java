@@ -62,7 +62,7 @@ public class CodigosListFragment extends Fragment implements ICFragment {
         }
         catch (Exception ex) { }
         adapter = new GenericAdapter(Codigos, new int[] { R.id.tvwDescricao },
-                new String[] { "Codigo" }, R.layout.produto_item);
+                new String[] { "Codigo" }, R.layout.local_item);
         lstCodigos.setAdapter(adapter);
     }
 

@@ -40,8 +40,15 @@ public class Communicator extends AsyncTask<String, Void, String> {
         if (Urls[1] == "GET") {
             // HTTP GET
             try {
+                String data = "";
                 HttpClient httpclient = new DefaultHttpClient(); // for port 80 requests!
-                HttpGet httpget = new HttpGet(url);
+                HttpGet httpget;
+                if (Urls.length > 2) {
+                    httpget = new HttpGet(url + "?" + Urls[2]);
+                }
+                else {
+                    httpget = new HttpGet(url);
+                }
                 HttpResponse response = httpclient.execute(httpget);
                 HttpEntity entity = response.getEntity();
                 is = entity.getContent();
