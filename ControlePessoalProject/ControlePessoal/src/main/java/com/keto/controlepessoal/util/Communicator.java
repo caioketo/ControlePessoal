@@ -1,7 +1,10 @@
 package com.keto.controlepessoal.util;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.preference.PreferenceManager;
+
+import com.keto.controlepessoal.MainActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,18 +27,10 @@ import java.util.List;
  * Created by developer on 01/11/13.
  */
 public class Communicator extends AsyncTask<String, Void, String> {
-    public static String EmuURL = "http://jangadaserver.no-ip.info/Geral/";
-    public static String LocalURL = "http://192.168.25.2/Geral/";
 
     public static String getURL() {
-        if (Build.MODEL.contains("google_sdk") ||
-                Build.MODEL.contains("Emulator") ||
-                Build.MODEL.contains("Android SDK")) {
-            return EmuURL;
-        }
-        else {
-            return LocalURL;
-        }
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.ctx);
+        return settings.getString("host", "http://jangadaserver.no-ip.info/Geral/");
     }
     @Override
     protected String doInBackground(String... Urls) {

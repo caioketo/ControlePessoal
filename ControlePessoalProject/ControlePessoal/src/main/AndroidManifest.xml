@@ -40,14 +40,16 @@
 
         <activity
             android:name=".activities.MercadoAct"
-            android:label="@string/title_activity_produtos" >
+            android:label="@string/title_activity_produtos"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name="com.keto.controlepessoal.AddProduto"
-            android:label="@string/title_activity_add_produto" >
+            android:name="com.keto.controlepessoal.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

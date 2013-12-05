@@ -22,19 +22,27 @@ namespace ControlePessoalBE.Models.Json
 
         public ProdutoJson(ProdutoModel produtoB)
         {
-            Precos = new List<PrecoJson>();
-            Codigos = new List<CodigoJson>();
-            this.ProdutoId = produtoB.ProdutoId;
-            this.Descricao = produtoB.Descricao;
-            this.Quantidade = produtoB.Quantidade;
-            this.QuantidadeAviso = produtoB.QuantidadeAviso;
-            foreach (PrecoModel preco in produtoB.Precos)
+            if (produtoB == null)
             {
-                this.Precos.Add(new PrecoJson(preco));
+                Precos = new List<PrecoJson>();
+                Codigos = new List<CodigoJson>();
             }
-            foreach (CodigoModel codigo in produtoB.Codigos)
+            else
             {
-                this.Codigos.Add(new CodigoJson(codigo));
+                Precos = new List<PrecoJson>();
+                Codigos = new List<CodigoJson>();
+                this.ProdutoId = produtoB.ProdutoId;
+                this.Descricao = produtoB.Descricao;
+                this.Quantidade = produtoB.Quantidade;
+                this.QuantidadeAviso = produtoB.QuantidadeAviso;
+                foreach (PrecoModel preco in produtoB.Precos)
+                {
+                    this.Precos.Add(new PrecoJson(preco));
+                }
+                foreach (CodigoModel codigo in produtoB.Codigos)
+                {
+                    this.Codigos.Add(new CodigoJson(codigo));
+                }
             }
         }
     }

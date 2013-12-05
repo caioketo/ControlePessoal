@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
     private static final int PERIOD=300000;
-    final String PREFS_NAME = "ControlePessoalPref";
     ArrayList<String> prods = new ArrayList<String>();
     public static Context ctx;
     public static Activity act;
@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void firstRun() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         if (settings.getBoolean("firstRun", true)) {
             AlarmManager mgr=(AlarmManager)ctx.getSystemService(Context.ALARM_SERVICE);
             Intent i=new Intent(ctx, OnAlarmReciever.class);
@@ -89,9 +89,9 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

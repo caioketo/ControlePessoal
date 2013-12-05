@@ -51,6 +51,7 @@ public class LocaisListFragment extends Fragment implements ICFragment {
     @Override
     public void refresh() {
         try {
+            Locais.clear();
             String jsonCompras = new Communicator().execute("Locais", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {

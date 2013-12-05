@@ -10,6 +10,7 @@
     <string name="title_locais">Locais</string>
     <string name="title_add_produto">Adicionar Produto</string>
     <string name="title_add_compra">Adicionar Compra</string>
+    <string name="title_codigos">Códigos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -30,6 +31,8 @@
     <string name="local">Local</string>
     <string name="add_item">Adicionar Item</string>
     <string name="codigos">Códigos</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="host">Caminho WebService</string>
     <string name="err_compra_semitem">Não é possível adicionar uma compra sem item</string><string name="produto">Produto</string><string name="preco">Preço</string>
 
 </resources>

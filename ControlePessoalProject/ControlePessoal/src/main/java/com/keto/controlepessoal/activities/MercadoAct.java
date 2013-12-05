@@ -1,5 +1,6 @@
 package com.keto.controlepessoal.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.keto.controlepessoal.R;
+import com.keto.controlepessoal.SettingsActivity;
 import com.keto.controlepessoal.activities.fragments.ComprasListFragment;
 import com.keto.controlepessoal.activities.fragments.ICFragment;
 import com.keto.controlepessoal.activities.fragments.LocaisListFragment;
@@ -50,7 +52,7 @@ public class MercadoAct extends ActionBarActivity
 
         String[] tmp = { getString(R.string.title_produtos), getString(R.string.title_compras),
                 getString(R.string.title_locais), getString(R.string.title_add_produto),
-                getString(R.string.title_add_compra) };
+                getString(R.string.title_add_compra), getString(R.string.title_codigos) };
         Titulos = tmp;
     }
 
@@ -113,7 +115,14 @@ public class MercadoAct extends ActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return CurrFrag.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
+            return CurrFrag.onOptionsItemSelected(item);
+        }
     }
 
     @Override

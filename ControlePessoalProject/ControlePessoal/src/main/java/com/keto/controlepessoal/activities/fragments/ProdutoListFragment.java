@@ -57,6 +57,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
     @Override
     public void refresh() {
         try {
+            Produtos.clear();
             String jsonProds = new Communicator().execute("Produtos", "GET").get();
             JSONArray jarray = new JSONArray(jsonProds);
             for (int i = 0; i < jarray.length(); i++) {

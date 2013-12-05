@@ -46,6 +46,7 @@ public class ComprasListFragment extends Fragment implements ICFragment {
     @Override
     public void refresh() {
         try {
+            Compras.clear();
             String jsonCompras = new Communicator().execute("Compras", "GET").get();
             JSONArray jarray = new JSONArray(jsonCompras);
             for (int i = 0; i < jarray.length(); i++) {

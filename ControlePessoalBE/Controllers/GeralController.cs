@@ -1,4 +1,5 @@
 ﻿using ControlePessoalBE.Models;
+using ControlePessoalBE.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,12 @@ namespace ControlePessoalBE.Controllers
         //PRODUTOS
         public JsonResult Produtos()
         {
-            return Json(db.Produtos.ToList(), JsonRequestBehavior.AllowGet);
+            List<ProdutoJson> prods = new List<ProdutoJson>();
+            foreach (ProdutoModel produto in db.Produtos.ToList())
+            {
+                prods.Add(new ProdutoJson(produto));
+            }
+            return Json(prods, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult AddCodigo(int produtoId, string codigo)
@@ -39,12 +45,17 @@ namespace ControlePessoalBE.Controllers
 
         public JsonResult FindCodigo(string codigo)
         {
-            return Json(db.Produtos.Where(p => p.ProdutoId == db.Codigos.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault().ProdutoID).First(), JsonRequestBehavior.AllowGet);
+            return Json(new ProdutoJson(db.Produtos.Where(p => p.ProdutoId == db.Codigos.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault().ProdutoID).First()), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Codigos(int produtoId)
         {
-            return Json(db.Codigos.Where(c => c.ProdutoID == produtoId).ToList(), JsonRequestBehavior.AllowGet);
+            List<CodigoJson> codigos = new List<CodigoJson>();
+            foreach (CodigoModel codigo in db.Codigos.Where(c => c.ProdutoID == produtoId).ToList())
+            {
+                codigos.Add(new CodigoJson(codigo));
+            }
+            return Json(codigos, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -74,7 +85,12 @@ namespace ControlePessoalBE.Controllers
         //COMPRAS
         public JsonResult Compras()
         {
-            return Json(db.Compras.ToList(), JsonRequestBehavior.AllowGet);
+            List<CompraJson> compras = new List<CompraJson>();
+            foreach (CompraModel compra in db.Compras.ToList())
+            {
+                compras.Add(new CompraJson(compra));
+            }
+            return Json(compras, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
