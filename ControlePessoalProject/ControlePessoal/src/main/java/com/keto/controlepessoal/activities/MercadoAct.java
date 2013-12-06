@@ -1,5 +1,6 @@
 package com.keto.controlepessoal.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ public class MercadoAct extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+    public static Context ctx;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
@@ -38,6 +40,7 @@ public class MercadoAct extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ctx = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produtos);
 

@@ -171,6 +171,7 @@
     <Compile Include="Models\CodigoModel.cs" />
     <Compile Include="Models\CompraModel.cs" />
     <Compile Include="Models\CPContext.cs" />
+    <Compile Include="Models\ItemDeReceitaModel.cs" />
     <Compile Include="Models\ItemDeCompraModel.cs" />
     <Compile Include="Models\Json\CodigoJson.cs" />
     <Compile Include="Models\Json\CompraJson.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\PrecoModel.cs" />
     <Compile Include="Models\Json\ProdutoJson.cs" />
     <Compile Include="Models\ProdutoModel.cs" />
+    <Compile Include="Models\ReceitaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

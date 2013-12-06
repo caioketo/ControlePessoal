@@ -18,6 +18,14 @@
         android:layout_below="@id/btnProdutos"
         android:layout_alignParentLeft="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TESTE ALERTA"
+        android:id="@+id/btnAlerta"
+        android:layout_below="@id/btnScan"
+        android:layout_alignParentLeft="true" />
+
     <LinearLayout
         xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
         android:layout_below="@+id/btnScan"

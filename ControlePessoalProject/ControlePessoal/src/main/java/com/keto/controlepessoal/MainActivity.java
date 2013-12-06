@@ -20,6 +20,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.keto.controlepessoal.activities.MercadoAct;
+import com.keto.controlepessoal.classes.AlertaProduto;
+import com.keto.controlepessoal.classes.Produto;
+import com.keto.controlepessoal.service.AppService;
 import com.keto.controlepessoal.service.OnAlarmReciever;
 import com.keto.controlepessoal.util.IntentIntegrator;
 import com.keto.controlepessoal.util.IntentResult;
@@ -120,6 +123,19 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     IntentIntegrator integrator = new IntentIntegrator(getActivity());
                     integrator.initiateScan();
+                }
+            });
+            ((Button)rootView.findViewById(R.id.btnAlerta)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Produto prod = new Produto();
+                    prod.ProdutoId = 1;
+                    prod.Descricao = "Teste Produto";
+                    prod.Quantidade = 1;
+                    prod.QuantidadeAviso = 1;
+                    AlertaProduto alerta = new AlertaProduto();
+                    alerta.Produto = prod;
+                    AppService.CreateNotification(alerta);
                 }
             });
             return rootView;

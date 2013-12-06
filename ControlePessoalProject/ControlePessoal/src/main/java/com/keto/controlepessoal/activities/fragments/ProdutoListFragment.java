@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.keto.controlepessoal.R;
 import com.keto.controlepessoal.activities.MercadoAct;
@@ -28,7 +29,6 @@ import com.keto.controlepessoal.util.IntentIntegrator;
 import com.keto.controlepessoal.util.IntentResult;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -43,6 +43,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
     GenericAdapter adapter;
     ArrayList<Produto> Produtos;
     int SelProdId;
+    AlertDialog dialog;
 
     public static Fragment newInstance() {
         ProdutoListFragment fragment = new ProdutoListFragment();
@@ -98,10 +99,11 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
 
         if (scan!=null) {
             try {
-                String jsonProd = new Communicator().execute("AddCodigo", "POST",
+                new Communicator().execute("AddCodigo", "POST",
                         "produtoId=" + SelProdId + "&codigo=" + scan.getContents())
                         .get();
-                Produto prod = new Produto(new JSONObject(jsonProd));
+                //Produto prod = new Produto(new JSONObject(jsonProd));
+                Toast.makeText(MercadoAct.ctx, "Adicionado código: " + scan.getContents(), Toast.LENGTH_SHORT);
             }
             catch (Exception ex) {
 
@@ -124,6 +126,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
             btnScan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dialog.dismiss();
                     (new IntentIntegrator(getActivity())).initiateScan();
                 }
             });
@@ -132,10 +135,9 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
                 public void onClick(DialogInterface dialog, int which) {
                     if (!edtCodigo.getText().toString().equals("")) {
                         try {
-                            String jsonProd = new Communicator().execute("AddCodigo", "POST",
+                            new Communicator().execute("AddCodigo", "POST",
                                     "produtoId=" + Produtos.get(info.position).ProdutoId + "&codigo=" + edtCodigo.getText().toString())
                                     .get();
-                            Produto prod = new Produto(new JSONObject(jsonProd));
                         }
                         catch (Exception ex) {
 
@@ -150,7 +152,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
                 }
             });
             builder.setView(dialogView);
-            final AlertDialog dialog = builder.create();
+            dialog = builder.create();
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             dialog.show();
         }

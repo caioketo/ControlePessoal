@@ -20,4 +20,8 @@ public class AlertaProduto {
             ex.printStackTrace();
         }
     }
+
+    public AlertaProduto() {
+        this.AlertaId = IdGen.GenID();
+    }
 }
