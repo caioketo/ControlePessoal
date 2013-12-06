@@ -7,23 +7,17 @@ using System.Web;
 
 namespace ControlePessoalBE.Models
 {
-    public class ItemDeReceitaModel
+    public class PassoDeReceitaModel
     {
         [Key]
-        public int ItemDeReceitaId { get; set; }
+        public int PassoDeReceitaId { get; set; }
 
         [ForeignKey("Receita")]
         [Column(Order = 2)]
         public int? ReceitaID { get; set; }
         public virtual ReceitaModel Receita { get; set; }
-        [ForeignKey("Produto")]
-        [Column(Order = 3)]
-        public int? ProdutoID { get; set; }
-        public virtual ProdutoModel Produto { get; set; }
-        public double QuantidadeUtilizada { get; set; }
 
-        public ItemDeReceitaModel()
-        {
-        }
+        public int Ordem { get; set; }
+        public string Descricao { get; set; }
     }
 }

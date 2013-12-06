@@ -110,7 +110,7 @@ namespace ControlePessoalBE.Controllers
         {
             compramodel = db.Compras.Add(compramodel);
             db.SaveChanges();
-            return Json(compramodel, JsonRequestBehavior.AllowGet);
+            return Json(new CompraJson(compramodel), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -130,8 +130,28 @@ namespace ControlePessoalBE.Controllers
             db.SaveChanges();
             return Json(local, JsonRequestBehavior.AllowGet);
         }
+        
+        #endregion
 
+        #region Receitas
+        //RECEITAS
+        public JsonResult Receitas()
+        {
+            List<ReceitaJson> receitas = new List<ReceitaJson>();
+            foreach (ReceitaModel receita in db.Receitas.ToList())
+            {
+                receitas.Add(new ReceitaJson(receita));
+            }
+            return Json(receitas, JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpPost]
+        public JsonResult CreateReceita(ReceitaModel receita)
+        {
+            receita = db.Receitas.Add(receita);
+            db.SaveChanges();
+            return Json(new ReceitaJson(receita), JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

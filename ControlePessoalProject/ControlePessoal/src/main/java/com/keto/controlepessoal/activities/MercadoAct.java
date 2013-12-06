@@ -17,6 +17,7 @@ import com.keto.controlepessoal.activities.fragments.ComprasListFragment;
 import com.keto.controlepessoal.activities.fragments.ICFragment;
 import com.keto.controlepessoal.activities.fragments.LocaisListFragment;
 import com.keto.controlepessoal.activities.fragments.ProdutoListFragment;
+import com.keto.controlepessoal.activities.fragments.ReceitasListFragment;
 
 public class MercadoAct extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -55,7 +56,7 @@ public class MercadoAct extends ActionBarActivity
 
         String[] tmp = { getString(R.string.title_produtos), getString(R.string.title_compras),
                 getString(R.string.title_locais), getString(R.string.title_add_produto),
-                getString(R.string.title_add_compra), getString(R.string.title_codigos) };
+                getString(R.string.title_add_compra), getString(R.string.title_codigos), getString(R.string.title_receitas) };
         Titulos = tmp;
     }
 
@@ -70,6 +71,9 @@ public class MercadoAct extends ActionBarActivity
         }
         else if (position == 2) {
             CurrFrag = LocaisListFragment.newInstance();
+        }
+        else if (position == 3) {
+            CurrFrag = ReceitasListFragment.newInstance();
         }
         refreshFragment();
     }

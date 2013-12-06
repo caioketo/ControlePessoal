@@ -176,9 +176,13 @@
     <Compile Include="Models\Json\CodigoJson.cs" />
     <Compile Include="Models\Json\CompraJson.cs" />
     <Compile Include="Models\Json\ItemDeCompraJson.cs" />
+    <Compile Include="Models\Json\ItemDeReceitaJson.cs" />
     <Compile Include="Models\Json\LocalJson.cs" />
+    <Compile Include="Models\Json\PassoDeReceitaJson.cs" />
     <Compile Include="Models\Json\PrecoJson.cs" />
+    <Compile Include="Models\Json\ReceitaJson.cs" />
     <Compile Include="Models\LocalModel.cs" />
+    <Compile Include="Models\PassoDeReceitaModel.cs" />
     <Compile Include="Models\PrecoModel.cs" />
     <Compile Include="Models\Json\ProdutoJson.cs" />
     <Compile Include="Models\ProdutoModel.cs" />
