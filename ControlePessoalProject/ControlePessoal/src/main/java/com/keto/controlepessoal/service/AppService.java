@@ -2,7 +2,6 @@ package com.keto.controlepessoal.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
@@ -19,15 +18,18 @@ import org.json.JSONObject;
  * Created by developer on 13/11/13.
  */
 public class AppService extends WakefulIntentService {
+    public static AppService service;
+
     public AppService() {
         super("AppService");
+        service = this;
     }
 
     @Override
     protected void doWakefulWork(Intent intent) {
         //Checar WS por alertas
         try {
-            String jsonAlerta = new Communicator().execute("Alertas", "GET").get();
+            String jsonAlerta = new Communicator().execute("SERVICE", "Alertas", "GET").get();
             AlertaProduto alerta = new AlertaProduto(new JSONObject(jsonAlerta));
             CreateNotification(alerta);
         }
@@ -55,12 +57,12 @@ public class AppService extends WakefulIntentService {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainActivity.ctx);
         stackBuilder.addParentStack(MainActivity.class);
         //stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        mBuilder.setContentIntent(resultPendingIntent);
+        //PendingIntent resultPendingIntent =
+//                stackBuilder.getPendingIntent(
+//                        0,
+//                        PendingIntent.FLAG_UPDATE_CURRENT
+//                );
+//        mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) MainActivity.ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(alerta.AlertaId, mBuilder.build());

@@ -34,6 +34,14 @@
     <string name="codigos">Códigos</string>
     <string name="title_activity_settings">Configurações</string>
     <string name="host">Caminho WebService</string>
-    <string name="err_compra_semitem">Não é possível adicionar uma compra sem item</string><string name="produto">Produto</string><string name="preco">Preço</string>
+    <string name="err_compra_semitem">Não é possível adicionar uma compra sem item</string>
+    <string name="err_receita_semigrediente">Não é possível adicionar uma receita sem igredientes</string>
+    <string name="err_receita_sempasso">Não é possível adicionar uma receita sem passos</string>
+    <string name="produto">Produto</string>
+    <string name="preco">Preço</string>
+    <string name="title_activity_add_receita">Adicionar Receita</string>
+    <string name="title_receita">Receita</string>
+    <string name="title_igredientes">Igredientes</string>
+    <string name="title_passos">Passos</string><string name="igrediente">Igrediente:</string><string name="passo">Passo</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.keto.controlepessoal.activities.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.keto.controlepessoal.R;
+import com.keto.controlepessoal.activities.AddReceitaAct;
 import com.keto.controlepessoal.activities.MercadoAct;
 import com.keto.controlepessoal.classes.Receita;
 import com.keto.controlepessoal.classes.adapters.GenericAdapter;
@@ -101,7 +103,8 @@ public class ReceitasListFragment extends Fragment implements ICFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            //((MercadoAct)getActivity()).setCurrFrag(AddCompraFragment.newInstance(this));
+            startActivity(new Intent(getActivity(), AddReceitaAct.class));
+            refresh();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import com.keto.controlepessoal.MainActivity;
+import com.keto.controlepessoal.service.AppService;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,8 +30,14 @@ import java.util.List;
 public class Communicator extends AsyncTask<String, Void, String> {
 
     public static String getURL() {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.ctx);
-        return settings.getString("host", "http://jangadaserver.no-ip.info/Geral/");
+        if (MainActivity.ctx == null) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(AppService.service);
+            return settings.getString("host", "http://jangadaserver.no-ip.info/Geral/");
+        }
+        else {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainActivity.ctx);
+            return settings.getString("host", "http://jangadaserver.no-ip.info/Geral/");
+        }
     }
     @Override
     protected String doInBackground(String... Urls) {

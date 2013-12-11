@@ -20,6 +20,7 @@ public class Receita extends ClasseBase {
     public Receita() {
         Igredientes = new ArrayList<ItemDeReceita>();
         Passos = new ArrayList<PassoDeReceita>();
+        Descricao = "";
     }
 
     public Receita(JSONObject json) {

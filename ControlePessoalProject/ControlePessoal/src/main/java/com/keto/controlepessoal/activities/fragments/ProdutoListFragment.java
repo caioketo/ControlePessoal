@@ -98,6 +98,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
                 i);
 
         if (scan!=null) {
+            Toast.makeText(MercadoAct.ctx, "Adicionando código: " + scan.getContents(), Toast.LENGTH_SHORT);
             try {
                 new Communicator().execute("AddCodigo", "POST",
                         "produtoId=" + SelProdId + "&codigo=" + scan.getContents())
@@ -106,7 +107,7 @@ public class ProdutoListFragment extends Fragment implements ICFragment {
                 Toast.makeText(MercadoAct.ctx, "Adicionado código: " + scan.getContents(), Toast.LENGTH_SHORT);
             }
             catch (Exception ex) {
-
+                Toast.makeText(MercadoAct.ctx, ex.getMessage(), Toast.LENGTH_SHORT);
             }
         }
     }
