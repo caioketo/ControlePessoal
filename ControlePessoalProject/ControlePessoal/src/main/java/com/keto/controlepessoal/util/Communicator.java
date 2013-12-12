@@ -3,6 +3,7 @@ package com.keto.controlepessoal.util;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.keto.controlepessoal.MainActivity;
 import com.keto.controlepessoal.service.AppService;
@@ -15,10 +16,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -144,5 +149,19 @@ public class Communicator extends AsyncTask<String, Void, String> {
         httpost.setHeader("Content-type", "application/json");
 
         return httpclient.execute(httpost);
+    }
+
+    public void addImage(String imageField, String path, HttpPost httppost) {
+        FileBody localFileBody = new FileBody(new File(path), "image/jpg");
+        MultipartEntity localMultipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        try
+        {
+            localMultipartEntity.addPart("profilepicture", localFileBody);
+            httppost.setEntity(localMultipartEntity);
+        }
+        catch (Exception e)
+        {
+            Log.d("exception", e.toString());
+        }
     }
 }

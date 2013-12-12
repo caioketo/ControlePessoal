@@ -24,6 +24,18 @@ public class Produto extends ClasseBase {
         Precos = new ArrayList<Preco>();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (!(obj instanceof Produto))
+            return false;
+
+        return (this.ProdutoId == ((Produto)obj).ProdutoId);
+    }
+
 
     public Produto(JSONObject json) {
         Codigos = new ArrayList<Codigo>();

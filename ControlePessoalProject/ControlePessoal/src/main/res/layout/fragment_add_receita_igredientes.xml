@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@id/edtDescricao"
+        android:id="@id/edtQuantidade"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@id/lstLista"
-        android:layout_below="@id/edtDescricao"
+        android:layout_below="@id/edtQuantidade"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -61,6 +61,7 @@
         android:src="@drawable/abc_ic_cab_done_holo_light"
         android:layout_above="@id/lstLista"
         android:layout_alignRight="@id/lstLista"
-        android:layout_alignEnd="@id/lstLista" />
+        android:layout_alignEnd="@id/lstLista"
+        android:background="@null"/>
 
 </RelativeLayout>

@@ -137,11 +137,11 @@ public class AddReceitaAct extends ActionBarActivity implements ActionBar.TabLis
             catch (Exception ex) {
                 ex.printStackTrace();
             }
-            finish();
+            this.finish();
             return true;
         }
         else if (id == R.id.action_cancelar) {
-            finish();
+            this.finish();
             return true;
         }
         else {
@@ -285,15 +285,27 @@ public class AddReceitaAct extends ActionBarActivity implements ActionBar.TabLis
                     }
                 }
             });
+            lstIgredientes.setAdapter(igredientesAdapter);
 
             rootView.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    for (int i = 0; i < act.cReceita.Igredientes.size(); i++) {
+                        if (act.cReceita.Igredientes.get(i).Produto.equals(spnProdutos.getSelectedItem())) {
+                            act.cReceita.Igredientes.get(i).QuantidadeUtilizada += Double.parseDouble(edtQtde.getText().toString());
+                            igredientesAdapter.notifyDataSetChanged();
+                            edtQtde.setText("");
+                            spnProdutos.requestFocus();
+                            return;
+                        }
+                    }
                     ItemDeReceita item = new ItemDeReceita();
                     item.Produto = (Produto)spnProdutos.getSelectedItem();
                     item.QuantidadeUtilizada = Double.parseDouble(edtQtde.getText().toString());
                     act.cReceita.Igredientes.add(item);
                     igredientesAdapter.notifyDataSetChanged();
+                    edtQtde.setText("");
+                    spnProdutos.requestFocus();
                 }
             });
         }
@@ -303,8 +315,8 @@ public class AddReceitaAct extends ActionBarActivity implements ActionBar.TabLis
             final EditText edtDescricao = (EditText)rootView.findViewById(R.id.edtDescricao);
 
             lstPassos = (ListView)rootView.findViewById(R.id.lstLista);
-            passosAdapter = new GenericAdapter(act.cReceita.Passos, new int[] { R.id.tvwDescricao, R.id.tvwPreco },
-                    new String[] { "Passo", "Descricao" }, R.layout.item_compra_item);
+            passosAdapter = new GenericAdapter(act.cReceita.Passos, new int[] { R.id.tvwOrdem, R.id.tvwDescricao },
+                    new String[] { "Ordem", "Descricao" }, R.layout.item_receita_passo);
             passosAdapter.setButton(R.id.btnExcluir, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -315,6 +327,7 @@ public class AddReceitaAct extends ActionBarActivity implements ActionBar.TabLis
                     }
                 }
             });
+            lstPassos.setAdapter(passosAdapter);
 
             rootView.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -326,6 +339,7 @@ public class AddReceitaAct extends ActionBarActivity implements ActionBar.TabLis
                     passosAdapter.notifyDataSetChanged();
                     edtDescricao.setText("");
                     edtPasso.setText("");
+                    edtPasso.requestFocus();
                 }
             });
         }

@@ -187,6 +187,7 @@
     <Compile Include="Models\Json\ProdutoJson.cs" />
     <Compile Include="Models\ProdutoModel.cs" />
     <Compile Include="Models\ReceitaModel.cs" />
+    <Compile Include="Models\TesteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

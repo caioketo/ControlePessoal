@@ -153,5 +153,21 @@ namespace ControlePessoalBE.Controllers
             return Json(new ReceitaJson(receita), JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Testes
+        public JsonResult Teste()
+        {
+            TesteModel teste = new TesteModel();
+            teste.Descricao = "TaskerOK";
+            teste = db.Testes.Add(teste);
+            db.SaveChanges();
+            return Json(teste, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Testes()
+        {
+            return Json(db.Testes.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

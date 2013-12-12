@@ -53,7 +53,8 @@
         android:src="@drawable/abc_ic_cab_done_holo_light"
         android:layout_above="@id/lstLista"
         android:layout_alignRight="@id/lstLista"
-        android:layout_alignEnd="@id/lstLista" />
+        android:layout_alignEnd="@id/lstLista"
+        android:background="@null" />
 
     <EditText
         android:layout_width="wrap_content"
