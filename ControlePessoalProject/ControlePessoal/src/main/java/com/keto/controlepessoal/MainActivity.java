@@ -135,7 +135,7 @@ public class MainActivity extends ActionBarActivity {
                     prod.QuantidadeAviso = 1;
                     AlertaProduto alerta = new AlertaProduto();
                     alerta.Produto = prod;
-                    AppService.CreateNotification(alerta);
+                    AppService.CreateNotification(alerta, false);
                 }
             });
             return rootView;

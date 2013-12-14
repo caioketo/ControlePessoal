@@ -39,6 +39,7 @@
     <string name="err_receita_sempasso">Não é possível adicionar uma receita sem passos</string>
     <string name="produto">Produto</string>
     <string name="preco">Preço</string>
+    <string name="notification_add_lista_compra">Colocar na lista</string>
     <string name="title_activity_add_receita">Adicionar Receita</string>
     <string name="title_receita">Receita</string>
     <string name="title_igredientes">Igredientes</string>
