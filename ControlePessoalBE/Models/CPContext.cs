@@ -21,6 +21,7 @@ namespace ControlePessoalBE.Models
         public DbSet<ItemDeCompraModel> ItensDeCompra { get; set; }
         public DbSet<LocalModel> Locais { get; set; }
         public DbSet<ReceitaModel> Receitas { get; set; }
-        public DbSet<TesteModel> Testes { get; set; } 
+        public DbSet<TesteModel> Testes { get; set; }
+        public DbSet<ListaModel> Listas { get; set; }
     }
 }

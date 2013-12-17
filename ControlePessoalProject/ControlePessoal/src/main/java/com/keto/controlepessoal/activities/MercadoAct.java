@@ -56,7 +56,8 @@ public class MercadoAct extends ActionBarActivity
 
         String[] tmp = { getString(R.string.title_produtos), getString(R.string.title_compras),
                 getString(R.string.title_locais), getString(R.string.title_add_produto),
-                getString(R.string.title_add_compra), getString(R.string.title_codigos), getString(R.string.title_receitas) };
+                getString(R.string.title_add_compra), getString(R.string.title_codigos), getString(R.string.title_receitas),
+                getString(R.string.title_lista_aberta)};
         Titulos = tmp;
     }
 

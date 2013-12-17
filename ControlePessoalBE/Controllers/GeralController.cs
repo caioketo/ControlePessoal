@@ -154,6 +154,33 @@ namespace ControlePessoalBE.Controllers
         }
         #endregion
 
+        #region Listas
+        public JsonResult ListaAberta()
+        {
+            ListaModel listaAberta = db.Listas.Where(l => l.Aberta == true).FirstOrDefault();
+            return Json(new ListaJson(listaAberta), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AddProdutoLista(ProdutoModel produto)
+        {
+            ListaModel listaAberta = db.Listas.Where(l => l.Aberta == true).FirstOrDefault();
+            if (listaAberta == null)
+            {
+                listaAberta = new ListaModel();
+                listaAberta.Aberta = true;
+                listaAberta = db.Listas.Add(listaAberta);
+            }
+            ItemDeListaModel item = new ItemDeListaModel();
+            item.ListaID = listaAberta.ListaId;
+            item.ProdutoID = produto.ProdutoId;
+            listaAberta.Itens.Add(item);
+            db.Entry(listaAberta).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(new ListaJson(listaAberta), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Testes
         public JsonResult Teste()
         {

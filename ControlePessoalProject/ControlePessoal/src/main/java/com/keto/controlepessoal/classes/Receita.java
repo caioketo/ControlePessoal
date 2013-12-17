@@ -28,6 +28,7 @@ public class Receita extends ClasseBase {
         Passos = new ArrayList<PassoDeReceita>();
         try {
             this.ReceitaId = json.getInt("ReceitaId");
+            this.Descricao = json.getString("Descricao");
             JSONArray itens = json.getJSONArray("Igredientes");
             for (int i = 0; i < itens.length(); i++) {
                 Igredientes.add(new ItemDeReceita(itens.getJSONObject(i)));
