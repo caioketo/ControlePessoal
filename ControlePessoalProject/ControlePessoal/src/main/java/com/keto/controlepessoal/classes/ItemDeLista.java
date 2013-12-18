@@ -11,6 +11,7 @@ import org.json.JSONObject;
 public class ItemDeLista extends ClasseBase {
     public int ItemDeListaId;
     public Produto Produto;
+    public boolean Marcado;
 
     public ItemDeLista() { }
 
@@ -18,6 +19,7 @@ public class ItemDeLista extends ClasseBase {
         try {
             this.ItemDeListaId = json.getInt("ItemDeListaId");
             this.Produto = new Produto(json.getJSONObject("Produto"));
+            this.Marcado = false;
         }
         catch (Exception ex) {
             Log.e("JsonError", ex.getMessage());
@@ -34,6 +36,9 @@ public class ItemDeLista extends ClasseBase {
         }
         else if (prop.equals("ProdutoDescricao")) {
             return Produto.Descricao;
+        }
+        else if (prop.equals("Marcado")) {
+            return Marcado;
         }
         return null;
     }

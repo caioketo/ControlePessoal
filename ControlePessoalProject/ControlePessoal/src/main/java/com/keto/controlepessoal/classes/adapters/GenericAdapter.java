@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.keto.controlepessoal.MainActivity;
+import com.keto.controlepessoal.R;
 import com.keto.controlepessoal.classes.ClasseBase;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class GenericAdapter extends BaseAdapter {
     private View vi;
     private View.OnClickListener listener;
     private int buttonId;
+    private boolean RiscaProp;
 
     public GenericAdapter(ArrayList<? extends ClasseBase> data, int[] ids, String[] props, int layout) {
         Lista = data;
@@ -33,6 +36,11 @@ public class GenericAdapter extends BaseAdapter {
         LayoutId = layout;
         buttonId = -1;
         listener = null;
+        RiscaProp = false;
+    }
+
+    public void setRiscaProp(boolean riscaProp) {
+        this.RiscaProp = riscaProp;
     }
 
     public void setButton(int buttonId, View.OnClickListener listener) {
@@ -64,20 +72,42 @@ public class GenericAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        boolean risca = false;
         vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(LayoutId, null);
 
         assert vi != null;
 
+        if (this.RiscaProp) {
+            for (int i = 0; i < Ids.length; i++) {
+                Object valor = Lista.get(position).get(Props[i]);
+                if (valor instanceof Boolean) {
+                    risca = (Boolean)valor;
+                }
+            }
+        }
+
+
         for (int i = 0; i < Ids.length; i++) {
             Object valor = Lista.get(position).get(Props[i]);
             if (valor != null) {
-                if (valor instanceof String) {
-                    ((TextView)vi.findViewById(Ids[i])).setText((String)valor);
+                if (vi.findViewById(Ids[i]) instanceof CheckBox) {
+                    ((CheckBox)vi.findViewById(Ids[i])).setChecked((Boolean)valor);
                 }
                 else {
-                    ((TextView)vi.findViewById(Ids[i])).setText(valor.toString());
+                    if (valor instanceof String) {
+                        ((TextView)vi.findViewById(Ids[i])).setText((String)valor);
+                    }
+                    else {
+                        ((TextView)vi.findViewById(Ids[i])).setText(valor.toString());
+                    }
+                    if (risca) {
+                        ((TextView)vi.findViewById(Ids[i])).setTextAppearance(MainActivity.ctx, R.style.strokeText);
+                    }
+                    else {
+                        ((TextView)vi.findViewById(Ids[i])).setTextAppearance(MainActivity.ctx, R.style.normalText);
+                    }
                 }
             }
         }

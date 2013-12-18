@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.keto.controlepessoal.R;
 import com.keto.controlepessoal.activities.MercadoAct;
@@ -40,9 +42,27 @@ public class ListaAbertaFragment extends Fragment implements ICFragment {
         catch (Exception ex) {
             ex.printStackTrace();
         }
-        adapter = new GenericAdapter(lista.Itens, new int[] { R.id.tvwDescricao },
-                new String[] { "ProdutoDescricao" }, R.layout.local_item);
+        adapter = new GenericAdapter(lista.Itens, new int[] { R.id.tvwDescricao, R.id.cbxMarcado },
+                new String[] { "ProdutoDescricao", "Marcado" }, R.layout.item_lista_item);
+        adapter.setRiscaProp(true);
+        adapter.setButton(R.id.btnExcluir, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int position = lstItens.getPositionForView((RelativeLayout)v.getParent());
+                if (position >= 0) {
+                    lista.Itens.remove(adapter.getItem(position));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
         lstItens.setAdapter(adapter);
+        lstItens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lista.Itens.get(position).Marcado = !lista.Itens.get(position).Marcado;
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
